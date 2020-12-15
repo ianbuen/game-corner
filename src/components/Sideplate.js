@@ -72,17 +72,21 @@ export default function Sideplate({reversed, bet}) {
     // change lights depending on bet
     useEffect(() => {
 
+        let temp = "";
+
         switch (bet) {
             case "1":
-                gems.current.className += (" " + cls.one);
+                temp = " " + cls.one;
                 break;
             case "2": 
-                gems.current.className += (" " + cls.two);
+                temp = " " + cls.two;
                 break;
             case "3": 
-                gems.current.className += (" " + cls.three);
-                break;
+                temp = " " + cls.three;
+                break;                
         }
+
+        gems.current.className = cls.gems + temp;
     }, [bet]);
 
 

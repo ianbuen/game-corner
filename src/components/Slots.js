@@ -198,6 +198,7 @@ function Slots() {
     
         setPay(false);
         setStops(0);
+        setBet(0);
         setDialog("Bet how many coins?");
 
         coins < 1 && setDialog("GAME OVER! Out of coins!");
