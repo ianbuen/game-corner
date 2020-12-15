@@ -1,0 +1,330 @@
+@font-face {
+  font-family: "Pokemon GB";
+  src: url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.eot");
+  src: url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.svg#Pokemon GB")
+      format("svg");
+}
+
+@import url(//db.onlinewebfonts.com/c/831e1f4da157d96bc996f8c9f5f1e578?family=Pokemon+GB);
+
+.lines {
+  width: 100%;
+  height: 0.5vh;
+  position: absolute;
+  border-top: 2vh double #eee;
+  border-bottom: 2vh double #eee;
+  top: 5vh;
+  align-self: center;
+}
+
+.slots__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.coin__count {
+  display: flex;
+  align-self: center;
+  margin: 5vh 0;
+}
+
+.coin__count > div {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2vh;
+}
+
+.coin__count img {
+  width: 10vh;
+}
+
+.coin__count p {
+  font-family: "Pokemon GB";
+  background: white;
+  font-size: 2.5vh;
+}
+
+.vileplumes {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vileplumes > img {
+  width: 10vh;
+}
+
+.slots {
+  background: #eee;
+  max-height: calc(30vh + 20px);
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.reel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  max-width: 10vh;
+  max-height: calc(30vh + 20px);
+
+  background: #eee;
+  border: 4px solid black;
+  border-radius: 5px;
+}
+
+.divider {
+  height: 35vh;
+  border: 5px double black;
+  opacity: 0.9;
+}
+
+.reel img {
+  width: 10vh;
+  margin: 5px 0;
+}
+
+.dialog__box {
+  position: absolute;
+  bottom: 0;
+  background: white;
+  z-index: 1;
+}
+
+.dialog__text,
+.bet__option {
+  padding: 1.5vh 1.5vh 0;
+  margin: 0.5vh;
+  border: 7px double black;
+  border-radius: 5px;
+}
+
+.dialog__text > p {
+  width: 35vh;
+  min-height: 12vh;
+  line-height: 2.25;
+  font-family: "Pokemon GB";
+  font-size: 2.25vh;
+}
+
+.dialog__text img {
+  width: 5vh;
+}
+
+.result p {
+  width: auto;
+}
+
+.bet {
+  position: absolute;
+  background: white;
+  right: 0;
+  bottom: 0;
+}
+
+.bet__option {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1vh 2.25vh;
+
+  background: white;
+}
+
+.bet__option > button {
+  font-family: "Pokemon GB";
+  font-size: 2.75vh;
+  padding: 5px;
+  border: none;
+  background: none;
+}
+
+.bet__option > button:nth-child(2) {
+  margin: 2.5vh 0;
+}
+
+.dialog__prompt {
+  position: absolute;
+  visibility: hidden !important;
+  right: 2%;
+  bottom: 3%;
+  font-size: 7vh !important;
+  animation: blink 0.6s ease alternate infinite;
+}
+
+.hide {
+  visibility: hidden !important;
+}
+
+.show {
+  visibility: visible !important;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: translateY(0vh);
+  }
+  100% {
+    transform: translateY(12vh);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0vh);
+  }
+  100% {
+    transform: translateY(-2vh);
+  }
+}
+
+.reel img:last-child {
+  margin: 5px 0 0;
+}
+
+.slots__boxes,
+.button__panel {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button__panel > div {
+  width: 5vh;
+  height: 6vh;
+  margin: 2vh 4vh;
+  border: 5px double black;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #fffa 20%, #fffa 40%, #ffda75);
+  opacity: 0.9;
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .coin__count {
+    transform: scale(1.25);
+  }
+
+  .divider {
+    border: 7px double #000d;
+    margin: 0 5px;
+    height: 32vh;
+  }
+
+  .dialog__box {
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .bet button {
+    margin: 0 1vh;
+  }
+
+  .dialog__text > p {
+    font-size: 2.5vh;
+    
+  }
+
+  .slots__boxes {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+
+  .slots__container {
+    margin: 0 3vh;
+  }
+
+  .coin__count {
+    z-index: 1;
+    margin-bottom: 0;
+  }
+
+  .reel, .vileplumes > img {
+    margin: 1vw;
+  }
+
+  .button__panel :nth-child(2) {
+    margin-left: 4.25vw;
+    margin-right: 4.25vw;
+  }
+
+  .dialog__box {
+    /* position: relative; */
+    align-self: center;
+  }
+
+  .dialog__text > p {
+    width: 65vh;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .coin__count {
+    transform: scale(1.55);
+  }
+
+  .dialog__box {
+    transform-origin: center bottom;
+    transform: scale(1.25);
+    align-self: center;
+  }
+
+  .dialog__text > p {
+    width: 50vh;
+    font-size: 3vh;
+  }
+
+  .bet__option {
+    padding: 1vh 3vh;
+  }
+
+  .bet__option > button {
+    font-size: 3vh;
+  }
+
+  .slots,
+  .vileplumes,
+  .slots__boxes {
+    margin: 1vh 4vh;
+  }
+
+  .slots {
+    padding: 1vh;
+  }
+
+  .reel {
+    margin: 1vh;
+  }
+}
