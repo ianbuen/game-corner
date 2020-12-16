@@ -22,7 +22,7 @@ const icons = [
     {name: "berry", url: berry },
     {name: "ball", url: ball },
     {name: "seven", url: seven }
-];
+]; 
 
 export { vileplume, credit, payout, one, two, three, gem, hand };
 

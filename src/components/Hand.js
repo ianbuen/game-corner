@@ -5,10 +5,10 @@ import {hand} from "./Icons";
 
 const style = makeStyles({ 
     hand: {
-        width: "10vh",
+        width: "6vh",
         position: "absolute",
-        top: "-7vh",
-        left: "-2.5vh",
+        top: "-2.5vh",
+        left: "-0.5vh",
         animation: "float 0.7s ease alternate infinite",
     },
 });

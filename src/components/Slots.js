@@ -11,15 +11,14 @@ import icons from "./Icons";
 
 import { vileplume, credit, payout } from "./Icons"; 
 import { useStateValue } from "../StateProvider";
-import shuffle from "shuffle-array";
 import { makeStyles } from "@material-ui/core";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Modal from "./Modal";
 import Sideplate from "./Sideplate";
-import Hand from "./Hand";
+import Hand from "./Hand"; 
 
 // reel speed in milliseconds
-const speed = 90;
+const speed = 100;
 
 const styles = makeStyles({
   slots: {
@@ -31,8 +30,7 @@ const styles = makeStyles({
   post: {
     right: "0%"
   }
-});
-
+}); 
 
 function Slots() {
   
@@ -55,9 +53,9 @@ function Slots() {
   // 1st Effect: creates 3 reels and makes a timer
   useEffect(() => { 
 
-    const reelA = shuffle([...icons]);
-    const reelB = shuffle([...reelA]);
-    const reelC = shuffle([...reelB]);
+    const reelA = preRoll(_.shuffle([...icons]));
+    const reelB = preRoll(_.shuffle([...icons]));
+    const reelC = preRoll(_.reverse([...reelA]));
 
     dispatch({
       type: "SET_REELS",
@@ -122,6 +120,20 @@ function Slots() {
         checkMatch();  
 
   }, [stops]); 
+
+
+
+  // randomly offsets array elements
+  function preRoll(array) {
+
+    const totalRolls = Math.floor(Math.random() * array.length); 
+
+    for (var i = 0; i < totalRolls; i++) {
+          array.unshift(array.pop());
+    }
+
+    return array;
+  }
 
 
   function checkMatch() {
