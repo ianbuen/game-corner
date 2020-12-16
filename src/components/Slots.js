@@ -18,10 +18,13 @@ import Modal from "./Modal";
 import Sideplate from "./Sideplate";
 import Hand from "./Hand";
 
+// reel speed in milliseconds
+const speed = 90;
+
 const styles = makeStyles({
   slots: {
     "& img": { 
-      animation: "linear 0.09s infinite"
+      animation: `linear ${speed / 1000}s infinite`
     }
   },
 
@@ -49,18 +52,22 @@ function Slots() {
   
   const [time, setTime] = useState(new Date().getMilliseconds());
 
-
   // 1st Effect: creates 3 reels and makes a timer
   useEffect(() => { 
 
+    const reelA = shuffle([...icons]);
+    const reelB = shuffle([...reelA]);
+    const reelC = shuffle([...reelB]);
+
     dispatch({
       type: "SET_REELS",
-      reels: [shuffle([...icons]), shuffle([...icons]), shuffle([...icons])]
+      reels: [reelA, reelB, reelC]
     });
 
+    // make a delay timer
     const timer = setInterval(() => {
       setTime(new Date().getMilliseconds()); 
-    }, 90);
+    }, (speed));
 
     return () => clearInterval(timer);
 
@@ -68,7 +75,7 @@ function Slots() {
 
 
 
-  // 2nd Effect: Run code every 90 ms
+  // 2nd Effect: Run code in ms based on reel speed
   useEffect(() => {
 
     if (reels && reels.length > 0) {
@@ -96,9 +103,12 @@ function Slots() {
         if (coinsWon < 1) {
             return reset();
         }
-            
+        
         setCoinsWon(coinsWon - 1);
-        setCoins(coins + 1);
+
+        if (coins < 9999)
+            setCoins(coins + 1);
+
         sound(coin);
     }
   
@@ -168,12 +178,19 @@ function Slots() {
   function playBet(event) {
     const {value} = event.target;
 
-    setRoll([true, true, true]);
-    setStart(true);
-    setDialog("Here goes... Good luck!");
-    setStops(0);
-    setBet(value);
-    setCoins(coins - value);
+    // if enough coins
+    if (coins >= value) {
+        setRoll([true, true, true]);
+        setStart(true);
+        setDialog("Here goes... Good luck!");
+        setStops(0);
+        setBet(value);
+        setCoins(coins - value);
+    } else {
+        setDialog("Not enough coins!");
+        setTimeout(() => { setDialog("Bet how many coins?") }, 2000);
+    }
+    
   } 
 
   function toggleReel(reel) {
@@ -191,17 +208,25 @@ function Slots() {
   function reset() {
 
     if (stops > 2) {
-        if (coinsWon > 0) {
-            setPay(true);
-            return;
-        }
     
-        setPay(false);
-        setStops(0);
-        setBet(0);
-        setDialog("Bet how many coins?");
+        if (coinsWon < 1) {
+            setPay(false);
+            setStops(0);
+            setBet(0); 
+            setDialog("Bet how many coins?");
 
-        coins < 1 && setDialog("GAME OVER! Out of coins!");
+            coins < 1 && setDialog("GAME OVER! Out of coins!");
+        }
+
+        // option to skip payouts
+        else if (pay) {
+            setCoins(coins + coinsWon);
+            setCoinsWon(0);
+            sound(coin);
+        }
+
+        else
+            setPay(true);
     }
   }
 
@@ -266,10 +291,7 @@ function Slots() {
 
         <ArrowDropDownIcon className={`dialog__prompt ${stops > 2 ? " show" : ""}`} />
 
-      </div>
-
-      {/* TEST */}
-      {/* <h1 onClick={() => {music().play()}} style={{fontSize: "5vh", margin: "15px", position: "absolute", top: "0", left: "0"}}>Bet: {bet}</h1> */}
+      </div> 
 
       <Modal onClick={() => { music.play() }} />
       </div>

@@ -11,7 +11,7 @@ export { ball, coin, seven, music, gameCorner };
 
 export default function sound(audio) {
     const sfx = (new Audio(audio))
-    sfx.volume = 0.25;
+    sfx.volume = audio === coin ? 0.15 : 0.25;
     
     return sfx.play();
 }
