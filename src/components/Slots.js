@@ -4,7 +4,7 @@ import "../styles/Slots.css";
 import Reel from "./Reel";
 
 // audio
-import sound, { ball, coin, seven, music } from "./Sounds";
+import sound, { ball, coin, seven, music, play, stop, deny, gameover } from "./Sounds";
 
 // images
 import icons from "./Icons";
@@ -42,7 +42,7 @@ function Slots() {
   
   const [start, setStart] = useState(false);
   const [stops, setStops] = useState(0);
-  const [coins, setCoins] = useState(50);
+  const [coins, setCoins] = useState(2);
   const [coinsWon, setCoinsWon] = useState(0);
   const [pay, setPay] = useState(false);
   const [bet, setBet] = useState(0);
@@ -182,12 +182,14 @@ function Slots() {
     if (coins >= value) {
         setRoll([true, true, true]);
         setStart(true);
+        sound(play);
         setDialog("Here goes... Good luck!");
         setStops(0);
         setBet(value);
         setCoins(coins - value);
     } else {
         setDialog("Not enough coins!");
+        sound(deny);
         setTimeout(() => { setDialog("Bet how many coins?") }, 2000);
     }
     
@@ -199,6 +201,7 @@ function Slots() {
 
     setRoll(prev => { prev[reel] = false; return prev; });
     setStops(stops + 1);
+    sound(stop);
   }
 
   function rollStyle(reelNo) {
@@ -215,7 +218,13 @@ function Slots() {
             setBet(0); 
             setDialog("Bet how many coins?");
 
-            coins < 1 && setDialog("GAME OVER! Out of coins!");
+            if (coins < 1) {
+                setDialog("GAME OVER! Out of coins!");
+                setStops(3);
+                music.volume = 0.1;
+                sound(gameover);
+                setTimeout(() => { music.volume = 0.25; }, 2000);
+            }
         }
 
         // option to skip payouts
