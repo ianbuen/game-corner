@@ -42,7 +42,7 @@ function Slots() {
   
   const [start, setStart] = useState(false);
   const [stops, setStops] = useState(0);
-  const [coins, setCoins] = useState(2);
+  const [coins, setCoins] = useState(50);
   const [coinsWon, setCoinsWon] = useState(0);
   const [pay, setPay] = useState(false);
   const [bet, setBet] = useState(0);
