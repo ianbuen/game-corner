@@ -10,7 +10,7 @@ import gameover from "../sounds/gameover.mp3";
 
 
 const music = (new Audio(gameCorner));
-music.volume = 0.10;
+music.volume = 0.15;
 music.loop = true;
 
 export { ball, coin, seven, music, play, stop, deny, gameover }; 
