@@ -62,8 +62,7 @@ export default function Modal({ onClick }) {
             <p>Tap to play...</p>
 
             <div className={cls.info}>
-                <p>Made by Ian Paul</p>
-                <p>IG: <a href="https://instagram.com/eoncognito" target="_blank">@eoncognito</a></p>
+                <p>Made by Ian</p>
                 <p>GitHub: <a href="https://github.com/ianbuen" target="_blank">@ianbuen</a></p>
                 <p>Original by Game Freak</p>
             </div>
